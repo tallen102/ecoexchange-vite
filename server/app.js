@@ -1,7 +1,8 @@
 import express from 'express';
 import mysql from 'mysql'
 import dotenv from'dotenv';
-
+import authRoutes from "./routes/auth.js"
+import userRoutes from "./routes/users.js"
 
 dotenv.config({
     path: './.env'
@@ -9,6 +10,8 @@ dotenv.config({
 
 const app = express();
 app.use(express.json())
+app.use("/server/auth", authRoutes)
+app.use("/server/users", userRoutes)
 
 export const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,
